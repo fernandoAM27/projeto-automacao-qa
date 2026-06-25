@@ -1,41 +1,50 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('@playwright/test')
+const { LandingPages } = require('./pages/LandingPages')
 
 test('deve cadastrar um lead na fila de espera', async ({ page }) => {
-    await page.goto('http://localhost:3000');
+    const landingPages = new LandingPages(page)
 
+    await landingPages.visit()
+    await landingPages.openLeadModal()
+    await landingPages.submitLeadForm('Fernando Machado', 'fernandoarraismachado@yahoo.com.br')
 
-    await page.getByRole('button', { name: /Aperte o play/ }).click()
-    await expect(
-        page.getByTestId('modal').getByRole('heading')
-    ).toHaveText('Fila de espera')
-
-    await page.getByPlaceholder('Seu nome completo').fill('Fernando Machado')
-    await page.getByPlaceholder('Seu email principal').fill('fernandoarraismachado@yahoo.com.br')
-
-    await page.getByTestId('modal')
-        .getByText('Quero entrar na fila!').click()
-
-
-    await expect(page.locator('.toast')).toHaveText('Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!')    
-
-    await expect(page.locator('.toast')).toBeHidden({timeout: 5000})
+    const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
+    await landingPages.toastHavenText(message)
 });
 
-test('Casos de erro', async ({ page }) => {
-    await page.goto('http://localhost:3000');
+test('Casos de erro de e-mail', async ({ page }) => {
+    const landingPages = new LandingPages(page)
 
+    await landingPages.visit()
+    await landingPages.openLeadModal()
+    await landingPages.submitLeadForm('Fernando Machado', 'fernandoarraismachado.com')
+    await landingPages.alertHaveText('Email incorreto')
 
-    await page.getByRole('button', { name: /Aperte o play/ }).click()
-    await expect(
-        page.getByTestId('modal').getByRole('heading')
-    ).toHaveText('Fila de espera')
+});
 
-    await page.getByPlaceholder('Seu nome completo').fill('Fernando Machado')
-    await page.getByPlaceholder('Seu email principal').fill('fernando123')
+test('Casos de validação do nome', async ({ page }) => {
+    const landingPages = new LandingPages(page)
 
-    await page.getByTestId('modal')
-        .getByText('Quero entrar na fila!').click()
-    
-    await expect(page.locator('.alert')).toHaveText('Email incorreto')    
+    await landingPages.visit()
+    await landingPages.openLeadModal()
+    await landingPages.submitLeadForm('', 'fernandoarraismachado@yahoo.com.br')
+    await landingPages.alertHaveText('Campo obrigatório')
+});
 
+test('Casos de validação do e-mail', async ({ page }) => {
+    const landingPages = new LandingPages(page)
+
+    await landingPages.visit()
+    await landingPages.openLeadModal()
+    await landingPages.submitLeadForm('Fernando Machado', '')
+    await landingPages.alertHaveText('Campo obrigatório')
+});
+
+test('Casos de validação nenhum campo preenchido', async ({ page }) => {
+    const landingPages = new LandingPages(page)
+
+    await landingPages.visit()
+    await landingPages.openLeadModal()
+    await landingPages.submitLeadForm('', '')
+    await landingPages.alertHaveText(['Campo obrigatório', 'Campo obrigatório'])
 });
