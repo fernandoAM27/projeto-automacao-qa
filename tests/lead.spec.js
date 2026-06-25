@@ -6,5 +6,7 @@ test('deve cadastrar um lead na fila de espera', async ({ page }) => {
 
     await page.getByRole('button', { name: /Aperte o play/ }).click()
 
-    await page.waitForTimeout(10000)
+    await page.locator('#name').fill('fernandoarraismachado@yahoo.com.br')
+
+    await page.waitForTimeout(3000)
 });
