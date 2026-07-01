@@ -1,5 +1,6 @@
 
 const { expect } = require('@playwright/test')
+
 export class LandingPages {
 
     constructor(page) {
@@ -8,7 +9,6 @@ export class LandingPages {
 
     async visit() {
         await this.page.goto('http://localhost:3000');
-
     }
 
     async openLeadModal() {
@@ -16,7 +16,6 @@ export class LandingPages {
         await expect(
             this.page.getByTestId('modal').getByRole('heading')
         ).toHaveText('Fila de espera')
-
     }
 
     async submitLeadForm(name, email) {
@@ -25,15 +24,6 @@ export class LandingPages {
 
         await this.page.getByTestId('modal')
             .getByText('Quero entrar na fila!').click()
-
-    }
-
-    async toastHavenText(message) {
-        const toast = this.page.locator('.toast')
-
-        await expect(toast).toHaveText(message)
-        await expect(toast).toBeHidden({ timeout: 5000 })
-
     }
 
     async alertHaveText(target) {
