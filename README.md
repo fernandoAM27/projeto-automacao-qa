@@ -21,5 +21,5 @@ O projeto cobre os seguintes cenários de validação:
 
 ### Instalação
 1. Clone este repositório:
-   ```bash
+```bash
 git clone https://github.com/fernandoAM27/projeto-automacao-qa.git
