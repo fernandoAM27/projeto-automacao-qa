@@ -1,6 +1,7 @@
 const { test, expect } = require('@playwright/test')
 const { LandingPages } = require('../pages/LandingPages')
 const { Toast } = require('../pages/components')
+const { leads } = require('../fixtures/leads')
 
 let landingPage
 let toast
@@ -15,7 +16,7 @@ test('deve cadastrar um lead na fila de espera', async ({ page }) => {
 
     await landingPages.visit()
     await landingPages.openLeadModal()
-    await landingPages.submitLeadForm('Fernando Machado', 'fernandoarraismachado@yahoo.com.br')
+    await landingPages.submitLeadForm( leads.valid.name , leads.valid.email)
 
     const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
     await toast.havenText(message)
