@@ -1,11 +1,16 @@
 {
   "name": "zombieplus",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto de automação E2E com Playwright e JavaScript para validação de cadastro de leads e login administrativo.",
   "main": "lead.spec.js",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "report": "npx playwright show-report"
+  },
+  "keywords": ["playwright", "qa", "test-automation", "e2e-tests", "javascript", "github-actions"],
+  "author": "Fernando Arrais",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
