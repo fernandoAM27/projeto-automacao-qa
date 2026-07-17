@@ -1,7 +1,6 @@
 const { expect } = require('@playwright/test')
 
-
-export class Toast {
+class Toast {
 
     constructor(page) {
         this.page = page
@@ -14,4 +13,6 @@ export class Toast {
         await expect(toast).toBeHidden({ timeout: 5000 })
 
     }
-}    
+}
+
+module.exports = { Toast }

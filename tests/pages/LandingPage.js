@@ -1,7 +1,6 @@
-
 const { expect } = require('@playwright/test')
 
-export class LandingPages {
+class LandingPage {
 
     constructor(page) {
         this.page = page
@@ -30,3 +29,5 @@ export class LandingPages {
         await expect(this.page.locator('.alert')).toHaveText(target)
     }
 }
+
+module.exports = { LandingPage }
