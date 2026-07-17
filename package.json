@@ -9,13 +9,15 @@
     "test:ui": "npx playwright test --ui",
     "report": "npx playwright show-report"
   },
-  "keywords": ["playwright",
-  "javascript",
-  "qa",
-  "test-automation",
-  "e2e-tests",
-  "github-actions",
-  "page-object"],
+  "keywords": [
+     "playwright",
+    "javascript",
+    "qa",
+    "test-automation",
+    "e2e-tests",
+    "github-actions",
+    "page-object"
+  ],
   "author": "Fernando Arrais",
   "license": "ISC",
   "type": "commonjs",
@@ -23,6 +25,7 @@
     "@playwright/browser-chromium": "^1.61.0",
     "@playwright/test": "^1.61.1",
     "@types/node": "^26.0.1",
+    "@faker-js/faker": "^10.5.0",
     "wait-on": "^9.0.10"
   }
 }
