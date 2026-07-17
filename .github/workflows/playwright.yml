@@ -17,8 +17,18 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+      
+    # Inicia o servidor em segundo plano (&)
+    - name: Start Application
+      run: npm start & 
+      
+    # Aguarda o servidor subir na porta 3000
+    - name: Wait for server
+      run: npx wait-on http://localhost:3000
+      
     - name: Run Playwright tests
       run: npx playwright test
+      
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

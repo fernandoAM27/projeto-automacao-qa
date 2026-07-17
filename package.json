@@ -10,12 +10,13 @@
     "report": "npx playwright show-report"
   },
   "keywords": [
-    "playwright",
+     "playwright",
+    "javascript",
     "qa",
     "test-automation",
     "e2e-tests",
-    "javascript",
-    "github-actions"
+    "github-actions",
+    "page-object"
   ],
   "author": "Fernando Arrais",
   "license": "ISC",
@@ -24,9 +25,7 @@
     "@playwright/browser-chromium": "^1.61.0",
     "@playwright/test": "^1.61.1",
     "@types/node": "^26.0.1",
-    "@faker-js/faker": "^10.5.0"
-  },
-  "dependencies": {
-
+    "@faker-js/faker": "^10.5.0",
+    "wait-on": "^9.0.10"
   }
 }
