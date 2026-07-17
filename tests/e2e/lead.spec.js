@@ -1,6 +1,7 @@
 const { test, expect } = require('@playwright/test')
 const { LandingPages } = require('../pages/LandingPages')
 const { Toast } = require('../pages/components')
+const { faker } = require('@faker-js/faker')
 
 let landingPage
 let toast
@@ -11,13 +12,35 @@ test.beforeEach(async ({ page }) => {
 })
 
 test('deve cadastrar um lead na fila de espera', async ({ page }) => {
-    const landingPages = new LandingPages(page)
+    const leadName = faker.person.fullName()
+    const leadEmail = faker.internet.email()
 
-    await landingPages.visit()
-    await landingPages.openLeadModal()
-    await landingPages.submitLeadForm('Fernando Machado', 'fernandoarraismachado@yahoo.com.br')
+    await landingPage.visit()
+    await landingPage.openLeadModal()
+    await landingPage.submitLeadForm(leadName, leadEmail)
 
     const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
+    await toast.havenText(message)
+});
+
+test('não deve cadastrar quando o email ja existe', async ({ page , request }) => {
+    const leadName = faker.person.fullName()
+    const leadEmail = faker.internet.email()
+
+    const newLead = await request.post('http://localhost:3333/leads', {
+        data: {
+            name: leadName,
+            email: leadEmail
+        }
+    })
+
+    expect(newLead.ok()).toBeTruthy()
+
+    await landingPage.visit()
+    await landingPage.openLeadModal()
+    await landingPage.submitLeadForm(leadName, leadEmail)
+
+    const message = 'O endereço de e-mail fornecido já está registrado em nossa fila de espera.'
     await toast.havenText(message)
 });
 
