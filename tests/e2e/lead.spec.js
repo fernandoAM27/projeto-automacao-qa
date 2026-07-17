@@ -1,13 +1,13 @@
 const { test, expect } = require('@playwright/test')
-const { LandingPages } = require('../pages/LandingPages')
-const { Toast } = require('../pages/components')
+const { LandingPage } = require('../pages/LandingPage')
+const { Toast } = require('../pages/Components')
 const { faker } = require('@faker-js/faker')
 
 let landingPage
 let toast
 
 test.beforeEach(async ({ page }) => {
-    landingPage = new LandingPages(page)
+    landingPage = new LandingPage(page)
     toast = new Toast(page)
 })
 

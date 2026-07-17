@@ -1,7 +1,7 @@
 
 const { expect } = require('@playwright/test')
 
-export class MoviePage {
+class MoviePage {
 
     constructor(page) {
         this.page = page
@@ -12,3 +12,5 @@ export class MoviePage {
         await expect(this.page).toHaveURL(/.*admin/)
     }
 }
+
+module.exports = { MoviePage }

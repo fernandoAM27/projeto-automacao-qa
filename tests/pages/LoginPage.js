@@ -1,6 +1,6 @@
 const { expect } = require('@playwright/test')
 
-export class LoginPage {
+class LoginPage {
 
     constructor(page) {
         this.page = page
@@ -24,4 +24,6 @@ export class LoginPage {
         const alert = this.page.locator('span[class$=alert]')
         await expect(alert).toHaveText(text)
     }
-} 
+}
+
+module.exports = { LoginPage }
