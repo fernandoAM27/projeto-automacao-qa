@@ -1,7 +1,7 @@
 const leads = {
   valid: {
     name: 'Fernando Machado',
-    email: 'fernandoarraismachado@yahoo.com.br'
+    email: 'fernando.qa@example.com'
   },
 
   invalidEmail: {
