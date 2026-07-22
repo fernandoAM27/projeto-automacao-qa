@@ -56,7 +56,7 @@ test('Casos de erro de e-mail', async ({ page }) => {
 test('Casos de validação do nome', async ({ page }) => {
     await landingPage.visit()
     await landingPage.openLeadModal()
-    await landingPage.submitLeadForm('', 'fernandoarraismachado@yahoo.com.br')
+    await landingPage.submitLeadForm('', 'fernando.qa@example.com')
     await landingPage.alertHaveText('Campo obrigatório')
 });
 

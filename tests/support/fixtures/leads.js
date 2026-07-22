@@ -1,17 +1,17 @@
 const leads = {
   valid: {
     name: 'Fernando Machado',
-    email: 'fernandoarraismachado@yahoo.com.br'
+    email: 'fernando.qa@example.com'
   },
 
   invalidEmail: {
     name: 'Fernando Machado',
-    email: 'fernandoarraismachado.com'
+    email: 'fernando.qa.com'
   },
 
   emptyName: {
     name: '',
-    email: 'fernandoarraismachado@yahoo.com.br'
+    email: 'fernando.qa@example.com'
   },
 
   emptyEmail: {
