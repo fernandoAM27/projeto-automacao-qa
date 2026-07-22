@@ -3,9 +3,18 @@ const { Toast } = require('../pages/Components')
 const { LoginPage } = require('../pages/LoginPage')
 const { MoviePage } = require('../pages/MoviePage')
 
+const adminEmail = process.env.ADMIN_EMAIL
+const adminPassword = process.env.ADMIN_PASSWORD
+
 let loginPage
 let toast
 let moviePage
+
+test.beforeAll(() => {
+    if (!adminEmail || !adminPassword) {
+        throw new Error('Defina ADMIN_EMAIL e ADMIN_PASSWORD no arquivo .env')
+    }
+})
 
 test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page)
@@ -17,13 +26,13 @@ test.beforeEach(async ({ page }) => {
 
 test('deve logar como administrador', async ({ page }) => {
 
-    await loginPage.submit('admin@zombieplus.com', 'pwd123')
+    await loginPage.submit(adminEmail, adminPassword)
     await moviePage.isLoggedIn()
 })
 
 test('não deve logar com senha incorreta', async ({ page }) => {
 
-    await loginPage.submit('admin@zombieplus.com', 'abc123')
+    await loginPage.submit(adminEmail, 'abc123')
 
     const message = 'Oops!Ocorreu um erro ao tentar efetuar o login. Por favor, verifique suas credenciais e tente novamente.'
     await toast.havenText(message)
@@ -43,6 +52,6 @@ test('não deve logar quando o email não é preenchido', async ({ page }) => {
 
 test('não deve logar quando a senha não é preenchida', async ({ page }) => {
 
-    await loginPage.submit('admin@zombieplus.com', '')
+    await loginPage.submit(adminEmail, '')
     await loginPage.alertHaveText('Campo obrigatório')
 })

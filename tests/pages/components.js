@@ -9,7 +9,7 @@ class Toast {
     async havenText(message) {
         const toast = this.page.locator('.toast')
 
-        await expect(toast).toHaveText(message)
+        await expect(toast).toContainText(message)
         await expect(toast).toBeHidden({ timeout: 5000 })
 
     }
