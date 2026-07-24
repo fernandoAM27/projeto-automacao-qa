@@ -14,6 +14,7 @@ class LoginPage {
     }
 
     async submit(email, password){
+        await this.visit()
         await this.page.getByPlaceholder('E-mail').fill(email)
         await this.page.getByPlaceholder('Senha').fill(password)
 
